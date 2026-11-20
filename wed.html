@@ -51,6 +51,9 @@
    "position": 5,
    "text": "Drizzle the rest of the glaze over everything, toss gently and serve."
   }
+ ],
+ "image": [
+  "https://ashafer25.github.io/KitchenView/img/plates/beyond-brat-sheet-pan-with-apples-onions-brussels-sprouts.jpg"
  ]
 }
 </script>
@@ -110,6 +113,9 @@ h1,h2,h3{font-family:var(--display); text-wrap:balance; margin:0; line-height:1.
 .meal .day{display:flex; justify-content:space-between; align-items:center; gap:8px; min-height:24px}
 .meal h2{font-size:1.32rem; font-weight:600; letter-spacing:-.01em}
 .meal p{margin:0; color:var(--muted); font-size:.95rem}
+.thumb{display:block; width:100%; aspect-ratio:16/10; object-fit:cover; border-radius:10px; background:var(--line)}
+.hero{display:block; width:100%; max-width:560px; aspect-ratio:16/9; max-height:200px; object-fit:cover; border-radius:16px; margin-bottom:14px; background:var(--line)}
+@media (max-height:520px){ .hero{max-height:120px; margin-bottom:10px} }
 .meal .meta{margin-top:auto; display:flex; gap:8px 10px; align-items:center; flex-wrap:wrap; font-size:.9rem; color:var(--muted); font-variant-numeric:tabular-nums}
 .pill{font-size:.72rem; font-weight:700; letter-spacing:.08em; text-transform:uppercase; padding:3px 9px; border-radius:999px; background:var(--accent); color:var(--accent-ink)}
 .chip{font-size:.8rem; font-weight:700; padding:3px 9px; border-radius:999px; white-space:nowrap}
@@ -344,7 +350,8 @@ body.cooking .step-text{font-size:clamp(1.5rem, 3vw + .8rem, 2.6rem); line-heigh
       "notes": [
         "The halibut comes frozen. Move it to the fridge Sunday night so it's thawed by dinner.",
         "A very dry fillet is the key to a golden sear."
-      ]
+      ],
+      "image": "img/plates/halibut-with-lemon-caper-butter-crispy-potatoes.svg"
     },
     {
       "id": "tue",
@@ -453,7 +460,8 @@ body.cooking .step-text{font-size:clamp(1.5rem, 3vw + .8rem, 2.6rem); line-heigh
       "notes": [
         "Gluten-free pasta goes gummy if overcooked. Start tasting 2 minutes before the box time.",
         "If your squash is whole, peel, seed and cube it first and allow an extra 10 minutes."
-      ]
+      ],
+      "image": "img/plates/butternut-squash-sage-brown-butter-pasta.svg"
     },
     {
       "id": "wed",
@@ -560,7 +568,8 @@ body.cooking .step-text{font-size:clamp(1.5rem, 3vw + .8rem, 2.6rem); line-heigh
       "notes": [
         "Check the Beyond package for a gluten-free label. Most Dijon is gluten-free too, but glance at the jar.",
         "Cut-side down sprouts get the crispiest edges."
-      ]
+      ],
+      "image": "img/plates/beyond-brat-sheet-pan-with-apples-onions-brussels-sprouts.svg"
     },
     {
       "id": "thu",
@@ -710,7 +719,8 @@ body.cooking .step-text{font-size:clamp(1.5rem, 3vw + .8rem, 2.6rem); line-heigh
       "notes": [
         "Use gluten-free tamari. Regular soy sauce contains wheat.",
         "The glaze can scorch fast. Lower the heat if it bubbles hard."
-      ]
+      ],
+      "image": "img/plates/ginger-sesame-salmon-rice-bowls.svg"
     },
     {
       "id": "fri",
@@ -869,7 +879,8 @@ body.cooking .step-text{font-size:clamp(1.5rem, 3vw + .8rem, 2.6rem); line-heigh
       "notes": [
         "No oven-safe skillet? Spoon the filling into an 8-inch baking dish before topping.",
         "Check the broth label for gluten-free. Some bouillon contains wheat."
-      ]
+      ],
+      "image": "img/plates/mushroom-lentil-shepherd-s-pie.svg"
     }
   ]
 }
@@ -907,6 +918,7 @@ body.cooking .step-text{font-size:clamp(1.5rem, 3vw + .8rem, 2.6rem); line-heigh
     var cards = PLAN.meals.map(function(m){
       var isNext = m === nextUp;
       return '<button class="meal' + (isNext ? ' is-next' : '') + '" data-go="' + esc(m.id) + '">' +
+        (m.image ? '<img class="thumb" src="' + esc(m.image) + '" alt="" loading="lazy">' : '') +
         '<span class="day"><span class="eyebrow">' + esc(m.day) + '</span>' + (isNext ? '<span class="pill">' + (tonight ? 'Tonight' : 'Up next') + '</span>' : '') + '</span>' +
         '<h2>' + esc(m.name) + '</h2>' +
         '<p>' + esc(m.blurb) + '</p>' +
@@ -935,7 +947,7 @@ body.cooking .step-text{font-size:clamp(1.5rem, 3vw + .8rem, 2.6rem); line-heigh
     var resume = stepPos[m.id] > 0 && stepPos[m.id] < m.steps.length;
     app.innerHTML =
       '<div class="topbar"><button class="back" data-go="week">' + ICON.left + 'This week</button><span class="eyebrow">' + esc(m.day) + '</span></div>' +
-      '<header class="recipe-head enter"><h1>' + esc(m.name) + '</h1>' +
+      '<header class="recipe-head enter">' + (m.image ? '<img class="hero" src="' + esc(m.image) + '" alt="">' : '') + '<h1>' + esc(m.name) + '</h1>' +
       '<div class="facts">' + kindChip(m) + '<span>Prep <b>' + m.prep + ' min</b></span><span>Cook <b>' + m.cook + ' min</b></span><span>Serves <b>' + m.serves + '</b></span></div></header>' +
       '<div class="split">' +
         '<section class="panel"><h2>Ingredients <small id="have">' + have + ' of ' + m.ingredients.length + ' out</small></h2><ul class="ings">' + ings + '</ul></section>' +
